@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fprosper <fprosper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 14:29:44 by fprosper          #+#    #+#             */
-/*   Updated: 2022/04/13 14:36:34 by fprosper         ###   ########.fr       */
+/*   Created: 2022/03/30 19:08:54 by fprosper          #+#    #+#             */
+/*   Updated: 2022/04/08 16:13:55 by fprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int	i;
+	size_t	i;
 
-	if (!dst && !src)
-		return (NULL);
-	if (dst > src)
+	i = 0;
+	while (i < n)
 	{
-		i = (int)len - 1;
-		while (i >= 0)
+		if ((*(unsigned char *)(s1 + i)) != (*(unsigned char *)(s2 + i)))
 		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i--;
+			return \
+				((*(unsigned char *)(s1 + i)) - (*(unsigned char *)(s2 + i)));
 		}
+		i++;
 	}
-	else
-	{
-		i = 0;
-		while (i < (int)len)
-		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i++;
-		}
-	}
-	return (dst);
+	return (0);
 }

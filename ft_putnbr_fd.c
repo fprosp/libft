@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fprosper <fprosper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 14:29:44 by fprosper          #+#    #+#             */
-/*   Updated: 2022/04/13 14:36:34 by fprosper         ###   ########.fr       */
+/*   Created: 2022/05/07 19:30:41 by fprosper          #+#    #+#             */
+/*   Updated: 2022/05/09 17:00:05 by fprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+static unsigned int	ft_module_fd(int n)
 {
-	int	i;
+	if (n < 0)
+		return (n * (-1));
+	else
+		return (n);
+}
 
-	if (!dst && !src)
-		return (NULL);
-	if (dst > src)
+void	ft_putnbr_fd(int n, int fd)
+{
+	unsigned int	num;
+
+	if (n < 0)
+		ft_putchar_fd('-', fd);
+	num = ft_module_fd(n);
+	if (num >= 10)
 	{
-		i = (int)len - 1;
-		while (i >= 0)
-		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i--;
-		}
+		ft_putnbr_fd(num / 10, fd);
+		ft_putnbr_fd(num % 10, fd);
 	}
 	else
-	{
-		i = 0;
-		while (i < (int)len)
-		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i++;
-		}
-	}
-	return (dst);
+		ft_putchar_fd(num + '0', fd);
 }

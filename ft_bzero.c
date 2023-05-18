@@ -6,7 +6,7 @@
 /*   By: fprosper <fprosper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:39:22 by fprosper          #+#    #+#             */
-/*   Updated: 2022/03/21 15:07:11 by fprosper         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:07:53 by fprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t i;
-	
-	i = 0;
-	while (i < n)
-	{
+	size_t	i;
+
+	i = -1;
+	while (++i < n)
 		*(unsigned char *)(s + i) = 0;
-		i++;
-	}
+	return ;
 }

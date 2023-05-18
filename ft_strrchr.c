@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fprosper <fprosper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 14:29:44 by fprosper          #+#    #+#             */
-/*   Updated: 2022/04/13 14:36:34 by fprosper         ###   ########.fr       */
+/*   Created: 2022/03/31 15:54:31 by fprosper          #+#    #+#             */
+/*   Updated: 2022/04/08 16:33:25 by fprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_strrchr(const char *s, int c)
 {
 	int	i;
 
-	if (!dst && !src)
-		return (NULL);
-	if (dst > src)
+	i = ft_strlen(s);
+	while (i >= 0)
 	{
-		i = (int)len - 1;
-		while (i >= 0)
+		if (*(s + i) == (char)c)
 		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i--;
+			return ((char *)(s + i));
 		}
+		i--;
 	}
-	else
-	{
-		i = 0;
-		while (i < (int)len)
-		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i++;
-		}
-	}
-	return (dst);
+	return (NULL);
 }

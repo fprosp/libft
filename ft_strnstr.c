@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fprosper <fprosper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 14:29:44 by fprosper          #+#    #+#             */
-/*   Updated: 2022/04/13 14:36:34 by fprosper         ###   ########.fr       */
+/*   Created: 2022/03/30 19:37:30 by fprosper          #+#    #+#             */
+/*   Updated: 2023/05/18 16:01:59 by fprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
 
-	if (!dst && !src)
-		return (NULL);
-	if (dst > src)
+	if (!haystack && !len)
+		return (0);
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	i = 0;
+	while (i < ft_strlen(haystack) && i < len)
 	{
-		i = (int)len - 1;
-		while (i >= 0)
+		j = 0;
+		while (*(needle + j) == *(haystack + i + j) && i + j < len)
 		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i--;
+			if (j + 1 == ft_strlen(needle))
+				return ((char *)haystack + i);
+			j++;
 		}
+		i++;
 	}
-	else
-	{
-		i = 0;
-		while (i < (int)len)
-		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i++;
-		}
-	}
-	return (dst);
+	return (NULL);
 }

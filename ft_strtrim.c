@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fprosper <fprosper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 14:29:44 by fprosper          #+#    #+#             */
-/*   Updated: 2022/04/13 14:36:34 by fprosper         ###   ########.fr       */
+/*   Created: 2022/04/13 15:24:15 by fprosper          #+#    #+#             */
+/*   Updated: 2022/04/19 17:20:17 by fprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	i;
+	size_t	s1_len;
+	char	*nstr;
 
-	if (!dst && !src)
+	if (!s1 || !set)
+	{
 		return (NULL);
-	if (dst > src)
-	{
-		i = (int)len - 1;
-		while (i >= 0)
-		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i--;
-		}
 	}
-	else
+	while (*s1 && ft_strchr(set, *s1))
 	{
-		i = 0;
-		while (i < (int)len)
-		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i++;
-		}
+		s1++;
 	}
-	return (dst);
+	s1_len = ft_strlen(s1);
+	while (s1_len && ft_strchr(set, *(s1 + s1_len)))
+	{
+		s1_len--;
+	}
+	nstr = ft_substr(s1, 0, s1_len + 1);
+	return (nstr);
 }
